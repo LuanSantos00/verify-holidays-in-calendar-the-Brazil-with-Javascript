@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Consulta de Feriados no Brasil</title>
+
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+	<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+	<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+  
+  <style type="text/css">
+		fieldset {
+  				border: 2px #af3333 solid;
+  			 border-radius: 10px;
+          position: absolute;
+        top: 10%; /* posiciona na metade da tela */
+        margin-top: -25px; /* e retrocede metade da altura */
+        left: 15%; /* posiciona na metade da tela */
+        right: : -13px;
+        padding: 60px;
+
+		}
+   
+		</style>
+</head>
+<body>
+	<fieldset  style="width: 50%">
+		<div align="right">
+        <img src="calendario.png" width="70px" height="70px">
+      </div>
+    <div align="center">
+			<h2>Consulta de Feriados no brasil em <span id="anoAtual"></span></h2>	
+
+
+			<span><legend><h3>Seja Bem-Vindo</h3></legend></span>
+
+			<p>Aqui você irá informar uma data, e verificar se essa data é feriado:</p>
+			<br>	<br>
+
+			<legend>
+				<label>Data:
+					<input type="text" name="data" id="data" placeholder="Informe a data" data-type="dd/mm/yy" onfocus="this.value='';" >
+					<button value="verificar" id="verificar" class="btn-template">Verificar</button>
+          <button id="limpar">Limpar</button>
+				</label>
+			</legend>
+
+		</div>
+	
+
+
+	</fieldset>
+</body>
+</html>
+
+<script>
+    $(document).ready(function () {
+
+
+      let _anoAtual = new Date().getFullYear();
+      document.getElementById("anoAtual").innerHTML = _anoAtual;
+
+      $("#data").datepicker({dateFormat: "dd/mm/yy" });
+      $("#verificar").click(function () {
+        var feriados = ['01/01/' + _anoAtual,'02/04/' + _anoAtual,'10/04/'+ _anoAtual,'21/04/'+ _anoAtual,'01/05/'+ _anoAtual,'07/09/'+ _anoAtual,'12/10/'+ _anoAtual,'02/11/'+ _anoAtual,'15/11/'+ _anoAtual,'12/25/'+ _anoAtual];
+        //var facultativo = ['24/02/2020','25/02/2020','26/02/2020','11/06/2020','24/12/2020','31/12/2020'];
+        var data = $("#data").val();
+        console.log(data);
+        if(feriados.indexOf(data) ==-1 && data!=""){
+          alert("Dia Comum.");
+          }
+         if(data != ""){
+            if(feriados.indexOf(data)!= -1){
+              alert("FERIADO NACIONAL");
+              }
+          }
+        else{
+          $.growl.error("","Por favor, informe uma data");  
+          }  
+      });
+
+      $("#limpar").click(function () {
+        $("#data").val("");
+      });
+    });
+    
+
+    
+    
+   
+   
+
+    
+</script>
